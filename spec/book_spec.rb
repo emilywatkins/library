@@ -21,3 +21,11 @@ describe("#id") do
     expect(book.id()).to(be_an_instance_of(Fixnum))
   end
 end
+
+describe("#==") do
+    it("is the same book if it has the same name and author") do
+      book1 = Book.new({:id => nil, :title => "book title", :author => "book author"})
+      book2 = Book.new({:id => nil, :title => "book title", :author => "book author"})
+      expect(book1).to(eq(book2))
+    end
+  end
