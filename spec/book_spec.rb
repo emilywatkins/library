@@ -39,3 +39,23 @@ describe(".find") do
     expect(Book.find(book2.id())).to(eq(book2))
   end
 end
+
+describe("#update") do
+  it("lets you update books in the database") do
+    book = Book.new({:id => nil, :title => "book title", :author => "book author"})
+    book.save()
+    book.update({:title => "new book title", :author => "book author"})
+    expect(book.title()).to(eq("new book title"))
+  end
+end
+
+describe("#delete") do
+  it("lets you delete a book from the database") do
+    book1 = Book.new({:id => nil, :title => "book title", :author => "book author"})
+    book1.save()
+    book2 = Book.new({:id => nil, :title => "book title 2", :author => "book author 2"})
+    book2.save()
+    book1.delete()
+    expect(Book.all()).to(eq([book2]))
+  end
+end

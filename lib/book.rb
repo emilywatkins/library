@@ -37,4 +37,16 @@ class Book
     end
     found_book
   end
+
+  def update(attributes) # should this be separated into update_title and update_author?
+    @author = attributes.fetch(:author)
+    @title = attributes.fetch(:title)
+    @id = self.id()
+    DB.exec("UPDATE books SET author = '#{@author}' WHERE id = #{@id};")
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{self.id()};")
+  end
 end
