@@ -18,4 +18,9 @@ class Book
     end
     books
   end
+
+  def save
+    result = DB.exec("INSERT INTO books (title, author) VALUES ('#{@title}', '#{@author}') RETURNING id;")
+    @id = result.first().fetch("id").to_i()
+  end
 end
