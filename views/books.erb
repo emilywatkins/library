@@ -1,0 +1,32 @@
+<h1>Books</h1>
+
+<% if @books.any?() %>
+  <h3>Here are your books:</h3>
+
+  <ul>
+    <% @books.each() do |book| %>
+      <li><a href="/books/<%= book.id()%>"><%= book.title() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no books yet</p>
+
+<% end %>
+
+<h3>Add A New Book</h3>
+
+<form action="/books" method="post">
+  <div class="form-group">
+    <label class="form-label" for='title'>Title:</label>
+    <input class="form-control" id='title' name='title' type='text' placeholder="Title" autofocus>
+    <label class="form-label" for='author'>Author:</label>
+    <input class="form-control" id='author' name='author' type='text' placeholder="Author" autofocus>
+    <button type="submit" class="button btn">Add Book</button>
+  </div>
+</form>
+
+<div class="container">
+  <a href="/">Home</a>
+</div>

@@ -8,3 +8,40 @@ require("pg")
 # DB = PG.connect({:dbname => "library"}) #connect to NON-TEST db
 
 DB = PG.connect({:dbname => "library_test"}) # change back to above when done testing
+
+get('/') do
+  erb(:index)
+end
+
+get('/books') do
+  @books = Book.all()
+  erb(:books)
+end
+
+post('/books') do
+  title = params['title']
+  author = params['author']
+  book = Book.new({:id => nil, :title => title, :author => author})
+  book.save()
+  @books = Book.all()
+  erb(:books)
+end
+
+get('/books/:id') do
+  @books = Book.all()
+  @book = Book.find(params.fetch('id').to_i())
+  erb(:book)
+end
+
+patch('/books/:id') do
+  @book = Book.find(params['id'].to_i)
+  title = @book.title
+  author = @book.author
+  if params['title']
+    title = params['title']
+  elsif params['author']
+    author = params['author']
+  end
+  @book.update({:title => title, :author => author})
+  erb(:book)
+end

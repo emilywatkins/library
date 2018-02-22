@@ -38,7 +38,7 @@ class Book
     found_book
   end
 
-  def update(attributes) # should this be separated into update_title and update_author?
+  def update(attributes)
     @author = attributes.fetch(:author)
     @title = attributes.fetch(:title)
     @id = self.id()
