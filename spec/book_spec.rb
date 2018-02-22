@@ -38,6 +38,14 @@ describe(".find") do
     book2.save()
     expect(Book.find(book2.id())).to(eq(book2))
   end
+
+  it("returns a book by its name or author") do
+    book1 = Book.new({:id => nil, :title => "book title", :author => "book author"})
+    book1.save()
+    book2 = Book.new({:id => nil, :title => "book title 2", :author => "book author 2"})
+    book2.save()
+    expect(Book.find(book2.title())).to(eq(book2))
+  end
 end
 
 describe("#update") do

@@ -28,10 +28,10 @@ class Book
     self.title().==(another_book.title()).&(self.author().==(another_book.author())).&(self.id().==(another_book.id()))
   end
 
-  def self.find(id)
+  def self.find(lookup)
     found_book = nil
     Book.all().each() do |book|
-      if book.id().==(id)
+      if book.id().==(lookup) || book.title == lookup || book.author == lookup
         found_book = book
       end
     end
