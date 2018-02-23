@@ -4,10 +4,12 @@ also_reload("lib/**/*.rb")
 require("./lib/book")
 require("./lib/patron")
 require("pg")
+require("pry")
+require("pry-nav")
 
 # DB = PG.connect({:dbname => "library"}) #connect to NON-TEST db
 
-DB = PG.connect({:dbname => "library_test"}) # change back to above when done testing
+DB = PG.connect({:dbname => "library"}) # change back to above when done testing
 
 get('/') do
   erb(:index)
@@ -37,9 +39,10 @@ patch('/books/:id') do
   @book = Book.find(params['id'].to_i)
   title = @book.title
   author = @book.author
-  if params['title']
+  if params['title'] != '' && params['title'] != nil
     title = params['title']
-  elsif params['author']
+  end
+  if params['author'] != '' && params['author'] != nil
     author = params['author']
   end
   @book.update({:title => title, :author => author})
