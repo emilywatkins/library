@@ -39,13 +39,3 @@ describe(".find") do
     expect(Patron.find(patron2.id())).to(eq(patron2))
   end
 end
-
-describe(".checkout") do
-  it("lets a patron check out a book, add to checkout table") do
-    patron1 = Patron.new({:id => nil, :name => "patron name"})
-    patron1.save()
-    patron2 = Patron.new({:id => nil, :name => "patron name"})
-    patron2.save()
-    expect(Patron.find(patron2.id())).to(eq(patron2))
-  end
-end
